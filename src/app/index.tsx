@@ -11,10 +11,12 @@ import { Helmet } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { GlobalStyle } from 'styles/global-styles';
-
-import { HomePage } from './pages/HomePage/Loadable';
-import { NotFoundPage } from './pages/NotFoundPage/Loadable';
+import NavigationBar from './navigationBar';
+import Home from './views/pages/Home';
+import { NotFoundPage } from './views/pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
+import About from './views/pages/About';
+import { Container } from '@material-ui/core';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -27,11 +29,15 @@ export function App() {
       >
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
+      <NavigationBar />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Container>
       <GlobalStyle />
     </BrowserRouter>
   );
