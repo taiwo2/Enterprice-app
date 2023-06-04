@@ -7,6 +7,8 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useLocation } from 'react-router';
+import { PieChart as PieChartIcon } from 'react-feather';
+import { Divider, ListSubheader } from '@material-ui/core';
 const drawerWidth = 240;
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -38,7 +40,7 @@ const useStyles = makeStyles(theme =>
   }),
 );
 
-const SidebarNavigation = () => {
+const Sidebar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
   useEffect(() => {}, []);
@@ -62,6 +64,15 @@ const SidebarNavigation = () => {
         </Toolbar>
         <div className={classes.drawerContainer}>
           <List>
+            <ListSubheader>Reports</ListSubheader>
+            <Link className={classes.link} to={`${pathname}`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <PieChartIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Dashboard'} />
+              </ListItem>
+            </Link>
             <Link className={classes.link} to={`${pathname}/settings-privacy`}>
               <ListItem button>
                 <ListItemIcon>
@@ -84,4 +95,4 @@ const SidebarNavigation = () => {
     </div>
   );
 };
-export default SidebarNavigation;
+export default Sidebar;

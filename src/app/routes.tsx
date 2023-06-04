@@ -6,12 +6,14 @@ import Dashboard from './layout/dashboard';
 import Home from './views/pages/Home';
 import About from './views/pages/About';
 import { LinearProgress } from '@material-ui/core';
+import ProductView from './views/dashboard/product/ProductView';
 const Routers = () => {
   return (
     <div>
       <Suspense fallback={<LinearProgress style={{ margin: '10rem' }} />}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="dashboard">
             <Route
               index
@@ -25,13 +27,20 @@ const Routers = () => {
               path="settings-privacy"
               element={
                 <Dashboard>
+                  <ProductView />
+                </Dashboard>
+              }
+            />
+            <Route
+              path="settings-privacy"
+              element={
+                <Dashboard>
                   <SettingsPrivacy />
                 </Dashboard>
               }
             />
           </Route>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}
