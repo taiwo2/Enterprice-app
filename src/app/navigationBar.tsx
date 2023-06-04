@@ -35,7 +35,9 @@ export default function NavigationBar() {
             <Link to={'/'}>Home</Link>
           </Button>
           <Button color="inherit">About</Button>
-          <Button color="inherit">Dashboard</Button>
+          <Button color="inherit">
+          <Link to={'/dashboard'}> Dashboard</Link>
+           </Button>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

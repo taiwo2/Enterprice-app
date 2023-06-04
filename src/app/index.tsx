@@ -17,6 +17,7 @@ import { NotFoundPage } from './views/pages/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import About from './views/pages/About';
 import { Container } from '@material-ui/core';
+import Routers from './routes';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -31,12 +32,14 @@ export function App() {
       </Helmet>
       <NavigationBar />
       <Container>
-        <Routes>
+      <Routers />
+        {/* <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
 
           <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+          
+        </Routes> */}
       </Container>
       <GlobalStyle />
     </BrowserRouter>
