@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect,useState} from 'react';
 import { makeStyles } from '@material-ui/core';
+
 const Header = () => {
   const classes = useStyles();
+
+  
   return (
     <div>
       <h1>Header - CreativeView Works!</h1>

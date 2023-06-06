@@ -4,4 +4,7 @@ requests*/
 /*JSON Server has CORS Policy by default*/
 const api = axios.create({ baseURL: 'http://localhost:5000/' });
 export default api;
-export const EndPoints = { sales: 'sales' };
+export const EndPoints = {
+  sales: 'sales',
+  products: 'products',
+};

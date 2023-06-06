@@ -131,7 +131,8 @@ const Sidebar = () => {
             <a className={classes.link} href={'/'}>
               <ListItem button>
                 <ListItemIcon>
-                  <ExitToAppIcon />
+                  {/* <ExitToAppIcon /> */}
+                  <LogOutIcon />
                 </ListItemIcon>
                 <ListItemText primary={'logout'} />
               </ListItem>
