@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -7,8 +7,16 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useLocation } from 'react-router';
-import { PieChart as PieChartIcon } from 'react-feather';
-import { Divider, ListSubheader } from '@material-ui/core';
+import {
+  PieChart as PieChartIcon,
+  ShoppingCart as ShoppingCartIcon,
+  ChevronUp as ChevronUpIcon,
+  ChevronDown as ChevronDownIcon,
+  List as ListIcon,
+  FilePlus as FilePlusIcon,
+  LogOut as LogOutIcon,
+} from 'react-feather';
+import { Collapse, Divider, ListSubheader } from '@material-ui/core';
 const drawerWidth = 240;
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -37,13 +45,21 @@ const useStyles = makeStyles(theme =>
       textDecoration: 'none',
       color: 'inherit',
     },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
   }),
 );
 
 const Sidebar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
+
+  const [open, setOpen] = useState(false);
   useEffect(() => {}, []);
+  const handleClick = () => {
+    setOpen(!open);
+  };
   return (
     <div className={classes.root}>
       <Drawer
@@ -73,6 +89,37 @@ const Sidebar = () => {
                 <ListItemText primary={'Dashboard'} />
               </ListItem>
             </Link>
+            <ListSubheader>Management</ListSubheader>
+            <ListItem button onClick={handleClick}>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Products" />
+              {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <Link className={classes.link} to={`${pathname}/list-products`}>
+                  <ListItem button className={classes.nested}>
+                    <ListItemIcon>
+                      <ListIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="List Products" />
+                  </ListItem>
+                </Link>
+                <Link
+                  className={classes.link}
+                  to={`${pathname}/create-product`}
+                >
+                  <ListItem button className={classes.nested}>
+                    <ListItemIcon>
+                      <FilePlusIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Create Product" />
+                  </ListItem>
+                </Link>
+              </List>
+            </Collapse>
             <Link className={classes.link} to={`${pathname}/settings-privacy`}>
               <ListItem button>
                 <ListItemIcon>

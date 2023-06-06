@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core';
 const ProductForm = () => {
   return (
     <div>
@@ -7,3 +8,5 @@ const ProductForm = () => {
   );
 };
 export default ProductForm;
+
+const useStyles = makeStyles(theme => ({}));
