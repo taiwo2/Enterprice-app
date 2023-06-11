@@ -99,7 +99,7 @@ const Sidebar = () => {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <Link className={classes.link} to={`${pathname}/list-products`}>
+                <Link className={classes.link} to={`list-products`}>
                   <ListItem button className={classes.nested}>
                     <ListItemIcon>
                       <ListIcon />

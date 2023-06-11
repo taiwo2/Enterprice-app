@@ -21,7 +21,7 @@ const DashboardContent = () => {
   const theme = useTheme();
   const fetchSales = async () => {
     const { data } = await getSalesAxios();
-    console.log(data);
+    // console.log(data);
     setSales(data);
   };
   useEffect(() => {

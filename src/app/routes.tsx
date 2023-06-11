@@ -7,6 +7,8 @@ import Home from './views/pages/Home';
 import About from './views/pages/About';
 import { LinearProgress } from '@material-ui/core';
 import ProductView from './views/dashboard/product/ProductView';
+import Results from './views/dashboard/product/ProductList/Results';
+import ProductList from './views/dashboard/product/ProductList';
 const Routers = () => {
   return (
     <div>
@@ -19,15 +21,24 @@ const Routers = () => {
               index
               element={
                 <Dashboard>
-                  <DashboardContent />
+                  {/* <DashboardContent /> */}
+                  <ProductList />
                 </Dashboard>
               }
             />
             <Route
-              path="settings-privacy"
+              path=""
               element={
                 <Dashboard>
                   <ProductView />
+                </Dashboard>
+              }
+            />
+             <Route
+              path="list-products"
+              element={
+                <Dashboard>
+                  <ProductList />
                 </Dashboard>
               }
             />
@@ -39,8 +50,15 @@ const Routers = () => {
                 </Dashboard>
               }
             />
+            {/* <Route
+              path="list-products"
+              element={
+                <Dashboard>
+                  <Results />
+                </Dashboard>
+              }
+            /> */}
           </Route>
-          
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}

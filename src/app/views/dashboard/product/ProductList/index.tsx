@@ -15,6 +15,7 @@ const ProductList = () => {
     handleToggle();
     try {
       const { data } = await getProductAxios();
+      console.log(data,'taiwo')
       setProducts(data);
     } catch (e) {
       alert('Something is wrong.');
@@ -30,7 +31,7 @@ const ProductList = () => {
   return (
     <Container>
       <Header />
-      <Results />
+      <Results products={products}/>
     </Container>
   );
 };

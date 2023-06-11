@@ -7,7 +7,7 @@
 
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-
+import 'react-quill/dist/quill.snow.css';
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
