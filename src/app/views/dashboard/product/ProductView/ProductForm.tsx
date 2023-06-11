@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { Formik } from 'formik';
 import { useSnackbar } from 'notistack';
@@ -43,7 +43,7 @@ type Props = {
 };
 const ProductForm = ({ className, ...rest }: Props) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   //we've deconstructed the snackbar to get just the enqueueSnackbar
   const { enqueueSnackbar } = useSnackbar();
   const [error, setError] = useState('');
@@ -67,7 +67,7 @@ concept. */
           enqueueSnackbar('Product Created', {
             variant: 'success',
           });
-          history.push('/dashboard/list-products');
+          navigate('/dashboard/list-products');
         } catch (err) {
           alert('Something happened. Please try again.');
           setError(err.message);
