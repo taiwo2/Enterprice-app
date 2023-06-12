@@ -12,6 +12,7 @@ import {
   ShoppingCart as ShoppingCartIcon,
   ChevronUp as ChevronUpIcon,
   ChevronDown as ChevronDownIcon,
+  Calendar as CalendarIcon,
   List as ListIcon,
   FilePlus as FilePlusIcon,
   LogOut as LogOutIcon,
@@ -126,6 +127,15 @@ const Sidebar = () => {
                   <SettingsIcon />
                 </ListItemIcon>
                 <ListItemText primary={'settings and privacy'} />
+              </ListItem>
+            </Link>
+            <ListSubheader>Applications</ListSubheader>
+            <Link className={classes.link} to={`${pathname}/calendar`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <CalendarIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Calendar'} />
               </ListItem>
             </Link>
             <a className={classes.link} href={'/'}>

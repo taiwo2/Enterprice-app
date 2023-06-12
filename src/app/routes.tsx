@@ -21,8 +21,7 @@ const Routers = () => {
               index
               element={
                 <Dashboard>
-                  {/* <DashboardContent /> */}
-                  <ProductList />
+                  <DashboardContent />
                 </Dashboard>
               }
             />
@@ -34,7 +33,7 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-             <Route
+            <Route
               path="list-products"
               element={
                 <Dashboard>
