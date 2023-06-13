@@ -9,6 +9,7 @@ import { LinearProgress } from '@material-ui/core';
 import ProductView from './views/dashboard/product/ProductView';
 import Results from './views/dashboard/product/ProductList/Results';
 import ProductList from './views/dashboard/product/ProductList';
+import CalendarView from './views/dashboard/CalendarView';
 const Routers = () => {
   return (
     <div>
@@ -49,14 +50,14 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-            {/* <Route
-              path="list-products"
+            <Route
+              path="calendar"
               element={
                 <Dashboard>
-                  <Results />
+                  <CalendarView />
                 </Dashboard>
               }
-            /> */}
+            />
           </Route>
         </Routes>
 

@@ -9,11 +9,11 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'react-quill/dist/quill.snow.css';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import 'sanitize.css/sanitize.css';
+import reportWebVitals from 'reportWebVitals';
 
-// Import root app
 import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
@@ -24,7 +24,9 @@ import { configureAppStore } from 'store/configureStore';
 import './locales/i18n';
 
 const store = configureAppStore();
-const MOUNT_NODE = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+);
 
 interface Props {
   Component: typeof App;
@@ -37,7 +39,7 @@ const ConnectedApp = ({ Component }: Props) => (
   </Provider>
 );
 const render = (Component: typeof App) => {
-  ReactDOM.render(<ConnectedApp Component={Component} />, MOUNT_NODE);
+  root.render(<ConnectedApp Component={Component} />);
 };
 
 if (module.hot) {
@@ -45,7 +47,8 @@ if (module.hot) {
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
   module.hot.accept(['./app', './locales/i18n'], () => {
-    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+    // ReactDOM.unmountComponentAtNode(root);
+    root.unmount();
     const App = require('./app').App;
     render(App);
   });
@@ -53,6 +56,4 @@ if (module.hot) {
 
 render(App);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+reportWebVitals();
