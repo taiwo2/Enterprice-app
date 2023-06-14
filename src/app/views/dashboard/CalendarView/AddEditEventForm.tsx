@@ -217,7 +217,7 @@ emits a date, not an event. */}
             {/* // //FormHelperText - to show an error message */}
             {Boolean(touched.end && errors.end) && (
               <Box mt={2}>
-                <FormHelperText error>{errors.end}</FormHelperText>
+                {/* <FormHelperText error>{errors.end}</FormHelperText> */}
               </Box>
             )}
           </Box>

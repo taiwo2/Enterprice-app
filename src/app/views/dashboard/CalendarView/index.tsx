@@ -1,9 +1,21 @@
 import React, { useEffect } from 'react';
-import { getEvents } from 'features/calendar/calendarSlice';
+import {
+  getEvents,
+  openModal,
+  closeModal,
+} from 'features/calendar/calendarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/reducers';
-import { Container, makeStyles } from '@material-ui/core';
+import {
+  Container,
+  makeStyles,
+  Dialog,
+  Paper,
+  useMediaQuery,
+} from '@material-ui/core';
 import Page from 'app/components/pages';
+import { EventType } from 'models/CalendarType';
+import AddEditEventForm from './AddEditEventForm';
 import Header from './Header';
 const CalendarView = () => {
   const dispatch = useDispatch();
@@ -11,28 +23,53 @@ const CalendarView = () => {
   const { events, loading, error, isModalOpen, selectedRange } = useSelector(
     (state: RootState) => state.calendar,
   );
+
+  const selectedEvent = useSelector(selectedEventSelector);
   // console.log(events,'taiwo')
   useEffect(() => {
     dispatch(getEvents());
   }, []);
-
+  const handleAddClick = (): void => {
+    dispatch(openModal());
+  };
+  const handleModalClose = (): void => {
+    dispatch(closeModal());
+  };
   return (
     <Page className={classes.root} title="Calendar">
       <Container maxWidth={false}>
-        <Header />
-        <h1>Calendar Works!</h1>
-        {loading && <h2>Loading... </h2>}
-        {error && <h2>Something happened </h2>}
-        <ul>
-          {events?.map(e => (
-            <li key={e.id}>{e.title} </li>
-          ))}
-        </ul>
+        <Header onAddClick={handleAddClick} />
+        <Dialog
+          maxWidth="sm"
+          fullWidth
+          onClose={handleModalClose}
+          open={isModalOpen}
+        >
+          {isModalOpen && (
+            <AddEditEventForm
+              event={selectedEvent}
+              range={selectedRange}
+              onAddComplete={handleModalClose}
+              onCancel={handleModalClose}
+              onDeleteComplete={handleModalClose}
+              onEditComplete={handleModalClose}
+            />
+          )}
+        </Dialog>
       </Container>
     </Page>
   );
 };
 export default CalendarView;
+
+const selectedEventSelector = (state: RootState): EventType | null => {
+  const { events, selectedEventId } = state.calendar;
+  if (selectedEventId) {
+    return events?.find(_event => _event.id === selectedEventId);
+  } else {
+    return null;
+  }
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
