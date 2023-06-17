@@ -10,6 +10,8 @@ import ProductView from './views/dashboard/product/ProductView';
 import Results from './views/dashboard/product/ProductList/Results';
 import ProductList from './views/dashboard/product/ProductList';
 import CalendarView from './views/dashboard/CalendarView';
+import LoginPage from './views/pages/auth/LoginPage';
+import ProtectedRoute from './components/protectedRoute';
 const Routers = () => {
   return (
     <div>
@@ -17,7 +19,7 @@ const Routers = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="dashboard">
+          <ProtectedRoute path="dashboard">
             <Route
               index
               element={
@@ -58,7 +60,8 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-          </Route>
+          </ProtectedRoute>
+          <Route path={'/login'} element={<LoginPage />} />
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}
