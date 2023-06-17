@@ -29,6 +29,13 @@ required.*/
 the Redux Toolkit can already infer what particular state it is. */
   extraReducers: builder => {
     builder.addCase(
+      getProfileAction.pending,
+      (state, action: PayloadAction) => {
+        state.loading = true;
+        state.error = '';
+      },
+    );
+    builder.addCase(
       getProfileAction.fulfilled,
       (state, action: PayloadAction<UserType>) => {
         state.profile = action.payload;
@@ -39,6 +46,14 @@ the Redux Toolkit can already infer what particular state it is. */
       (state, action: PayloadAction) => {
         state.loading = true;
         state.error = '';
+      },
+    );
+    builder.addCase(
+      getProfileAction.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = 'Something wrong happened';
+        console.log(action?.payload);
       },
     );
     builder.addCase(
@@ -57,5 +72,6 @@ the Redux Toolkit can already infer what particular state it is. */
       },
     );
   },
+  
 });
 export default profileSlice.reducer;
