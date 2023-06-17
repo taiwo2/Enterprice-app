@@ -113,7 +113,8 @@
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
     "prepare": "husky install",
-    "backend": "json-server --watch db.json --port 5000 --delay=1000"
+    "backend": "json-server --watch db.json --port 5000 --delay=1000 -m ./node_modules/json-server-auth",
+    "start:fullstack": "concurrently \"npm run backend\" \"npm run start\""
   },
   "browserslist": {
     "production": [

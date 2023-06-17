@@ -1,3 +1,4 @@
+#  // "backend": "json-server --watch db.json --port 5000 --delay=1000",  "start": "react-scripts start",
 # Don't check auto-generated stuff into git
 coverage
 build

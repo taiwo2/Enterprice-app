@@ -141,5 +141,15 @@
       "start": "2021-01-01T12:00:27.87+00:20",
       "title": "Visit Samantha"
     }
+  ],
+  "users": [
+    {
+      "id": "7fguyfte5",
+      "email": "demo@acme.io",
+      "password": "$2a$10$Pmk32D/fgkig8pU.r1rGrOpYYJSrnqqpLO6dRdo88iYxxIsl1sstC",
+      "name": "Mok Kuh",
+      "mobile": "+34782364823",
+      "policy": true
+    }
   ]
 }
