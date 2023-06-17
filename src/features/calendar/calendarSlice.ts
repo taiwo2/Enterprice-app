@@ -6,9 +6,8 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import { RootState } from 'store/reducers';
-import { EventType } from 'models/CalendarType';
+import { EventType } from 'models/calendarType';
 import axios, { EndPoints } from 'api/axios';
-
 
 /*Shape or types of our CalendarState */
 /*typings for the Thunk actions to give us intlelli-sense */

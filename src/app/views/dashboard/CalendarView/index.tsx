@@ -17,7 +17,7 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import Page from 'app/components/pages';
-import { EventType, ViewType } from 'models/CalendarType';
+import { EventType, ViewType } from 'models/calendarType';
 import AddEditEventForm from './AddEditEventForm';
 import Header from './Header';
 import moment from 'moment';

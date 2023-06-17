@@ -24,7 +24,7 @@ import {
   deleteEvent,
   updateEvent,
 } from 'features/calendar/calendarSlice';
-import { EventType } from 'models/CalendarType';
+import { EventType } from 'models/calendarType';
 type Props = {
   event?: EventType;
   onAddComplete?: () => void;

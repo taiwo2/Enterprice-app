@@ -16,7 +16,7 @@ import ViewConfigIcon from '@material-ui/icons/ViewComfyOutlined';
 import ViewWeekIcon from '@material-ui/icons/ViewWeekOutlined';
 import ViewDayIcon from '@material-ui/icons/ViewDayOutlined';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgendaOutlined';
-import { ViewType } from 'models/CalendarType';
+import { ViewType } from 'models/calendarType';
 
 type ViewOption = {
   label: string;

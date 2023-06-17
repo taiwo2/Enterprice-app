@@ -55,8 +55,11 @@ const useStyles = makeStyles(theme =>
 const Sidebar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
-
   const [open, setOpen] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    };
   useEffect(() => {}, []);
   const handleClick = () => {
     setOpen(!open);
@@ -139,9 +142,8 @@ const Sidebar = () => {
               </ListItem>
             </Link>
             <a className={classes.link} href={'/'}>
-              <ListItem button>
+              <ListItem button onClick={handleLogout}>
                 <ListItemIcon>
-                  {/* <ExitToAppIcon /> */}
                   <LogOutIcon />
                 </ListItemIcon>
                 <ListItemText primary={'logout'} />
