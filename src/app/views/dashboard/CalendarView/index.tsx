@@ -17,7 +17,7 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import Page from 'app/components/pages';
-import { EventType } from 'models/CalendarType';
+import { EventType, ViewType } from 'models/CalendarType';
 import AddEditEventForm from './AddEditEventForm';
 import Header from './Header';
 import moment from 'moment';
@@ -27,6 +27,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import timelinePlugin from '@fullcalendar/timeline';
+import Toolbar from './Toolbar';
 const CalendarView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -63,11 +64,115 @@ the 'calendarEl,' you'll see the interfaces or APIs available. */
       setDate(calendarApi.getDate());
     }
   };
-  
+  const handleDatePrev = (): void => {
+    const calendarEl = calendarRef.current;
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+      calendarApi.prev();
+      setDate(calendarApi.getDate());
+    }
+  };
+  const handleDateToday = (): void => {
+    const calendarEl = calendarRef.current;
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+      calendarApi.today();
+      setDate(calendarApi.getDate());
+    }
+  };
+  const handleViewChange = (newView: ViewType): void => {
+    const calendarEl = calendarRef.current;
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+      calendarApi.changeView(newView);
+      setView(newView);
+    }
+  };
+  /*the arg: any - could be a string or a number */
+  const handleEventSelect = (arg: any): void => {
+    dispatch(selectEvent(arg.event.id));
+  };
+  /*We have here a try-catch block because handleEventDrop is an async
+ function */
+
+  const handleEventDrop = async ({ event }: any): Promise<void> => {
+    try {
+      await dispatch(
+        updateEvent({
+          allDay: event.allDay,
+          start: event.start,
+          end: event.end,
+          id: event.id,
+        } as any),
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleEventResize = async ({ event }: any): Promise<void> => {
+    try {
+      await dispatch(
+        updateEvent({
+          allDay: event.allDay,
+          start: event.start,
+          end: event.end,
+          id: event.id,
+        } as any),
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const handleRangeSelect = (arg: any): void => {
+    const calendarEl = calendarRef.current;
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+      calendarApi.unselect();
+    }
+    dispatch(selectRange(arg.start, arg.end));
+  };
   return (
     <Page className={classes.root} title="Calendar">
       <Container maxWidth={false}>
         <Header onAddClick={handleAddClick} />
+        <Toolbar
+          date={date}
+          onDateNext={handleDateNext}
+          onDatePrev={handleDatePrev}
+          onDateToday={handleDateToday}
+          onViewChange={handleViewChange}
+          view={view}
+        />
+        <Paper className={classes.calendar}>
+          <FullCalendar
+            allDayMaintainDuration
+            droppable
+            editable
+            selectable
+            weekends
+            dayMaxEventRows
+            eventResizableFromStart
+            headerToolbar={false}
+            select={handleRangeSelect}
+            eventClick={handleEventSelect}
+            eventDrop={handleEventDrop}
+            eventResize={handleEventResize}
+            initialDate={date}
+            initialView={view}
+            events={events}
+            height={800}
+            ref={calendarRef}
+            rerenderDelay={10}
+            plugins={[
+              dayGridPlugin,
+              timeGridPlugin,
+              interactionPlugin,
+              listPlugin,
+              timelinePlugin,
+            ]}
+          />
+        </Paper>
         <Dialog
           maxWidth="sm"
           fullWidth
