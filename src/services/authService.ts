@@ -23,3 +23,16 @@ export async function registerAxios(registerModel: RegisterModel) {
     registerModel,
   );
 }
+export type ChangePasswordModel = {
+  email: string;
+  password: string;
+  id: string;
+};
+export async function changePassWordAxios(
+  changePasswordModel: ChangePasswordModel,
+) {
+  return await axios.put<void>(
+    `${EndPoints.users}/${changePasswordModel.id}`,
+    changePasswordModel,
+  );
+}
