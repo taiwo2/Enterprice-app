@@ -19,14 +19,23 @@ import {
 } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { registerAxios } from 'services/authService';
+import { useDispatch } from 'react-redux';
+import { saveClaimsAction, saveTokenAction } from 'features/auth/authSlice';
+import jwt_decode from 'jwt-decode';
+import { ClaimsType } from 'models/claimsType';
 
 const RegisterForm = () => {
   const key = 'token';
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
   const [isAlertVisible, setAlertVisible] = useState(false);
   const saveUserAuthDetails = (data: { accessToken: string }) => {
     localStorage.setItem(key, data.accessToken);
+    const claims: ClaimsType = jwt_decode(data.accessToken);
+    console.log('Claims::', claims);
+    dispatch(saveTokenAction(data.accessToken));
+    dispatch(saveClaimsAction(claims));
   };
 
   return (

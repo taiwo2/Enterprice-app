@@ -13,13 +13,21 @@ import {
   Card,
 } from '@material-ui/core';
 import { loginAxios } from 'services/authService';
-
+import jwt_decode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { saveClaimsAction, saveTokenAction } from 'features/auth/authSlice';
+import { ClaimsType } from 'models/claimsType';
 const LoginForm = () => {
   const key = 'token';
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
   const saveUserAuthDetails = (data: { accessToken: string }) => {
     localStorage.setItem(key, data.accessToken);
+    const claims: ClaimsType = jwt_decode(data.accessToken);
+    console.log('Claims::', claims); /*just to check it */
+    dispatch(saveTokenAction(data.accessToken));
+    dispatch(saveClaimsAction(claims));
   };
   return (
     <Formik
