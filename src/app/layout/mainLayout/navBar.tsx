@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { colors } from '@material-ui/core';
+import HeaderProfile from 'app/components/headerProfile';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function NavBar() {
   const classes = useStyles();
+  const { claims } = useSelector((state: RootState) => state.auth);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -35,10 +37,22 @@ export default function NavBar() {
             <Link to={'/'}>Home</Link>
           </Button>
           <Button color="inherit">About</Button>
-          <Button color="inherit">
-          <Link to={'/dashboard'}> Dashboard</Link>
-           </Button>
-          <Button color="inherit">Login</Button>
+          {claims ? (
+            <>
+              <Button color="inherit">
+                <Link className={classes.link} to={'/dashboard'}>
+                  Dashboard
+                </Link>
+              </Button>
+              <HeaderProfile />
+            </>
+          ) : (
+            <Button color="inherit">
+              <Link className={classes.link} to={'/login'}>
+                Login
+              </Link>
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
