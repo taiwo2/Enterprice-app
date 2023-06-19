@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route } from 'react-router-dom';
+import { Navigate, Outlet, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { saveClaimsAction } from 'features/auth/authSlice';
@@ -17,11 +17,7 @@ const ProtectedRoute = props => {
   const dateNow = Date.now();
   const isValid = dateNow <= expiresAt;
   dispatch(saveClaimsAction(decoded));
-  return isValid ? (
-    <Route {...props} />
-  ) : (
-    <Navigate to={{ pathname: '/login' }} />
-  );
+  return isValid ? <Outlet /> : <Navigate to={{ pathname: '/login' }} />;
 };
 
 export default ProtectedRoute;

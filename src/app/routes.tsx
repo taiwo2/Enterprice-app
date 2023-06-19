@@ -13,7 +13,7 @@ import CalendarView from './views/dashboard/CalendarView';
 import LoginPage from './views/pages/auth/LoginPage';
 import ProtectedRoute from './components/protectedRoute';
 import PricingPage from './views/pages/pricing/PricingPage';
-import path from 'path';
+// import path from 'path';
 import AccountView from './views/AccountView';
 const Routers = () => {
   return (
@@ -22,7 +22,7 @@ const Routers = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <ProtectedRoute path="dashboard">
+          <Route path="dashboard" element={<ProtectedRoute />}>
             <Route
               index
               element={
@@ -63,11 +63,11 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-          </ProtectedRoute>
-          <Route path={'/login'} element={<LoginPage />} />
-          <Route path={'/pricing'} element={<PricingPage />} />
+            <Route path="pricing" element={<PricingPage />} />
 
-          <Route path={path + '/account'} element={<AccountView />} />
+            <Route path="account" element={<AccountView />} />
+          </Route>
+          <Route path={'/login'} element={<LoginPage />} />
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}

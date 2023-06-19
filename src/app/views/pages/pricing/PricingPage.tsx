@@ -33,7 +33,7 @@ const PricingPage = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="images/products/product_standard.svg"
+                  src="images/products/productstandard.svg"
                 />
                 <Typography
                   component="h4"
@@ -96,7 +96,7 @@ const PricingPage = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="images/products/product_premium--outlined.svg"
+                  src="images/products/productpremoutlined.svg"
                 />
                 <Typography
                   component="h4"
@@ -156,7 +156,7 @@ const PricingPage = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="images/products/product_extended.svg"
+                  src="images/products/productextended.svg"
                 />
                 <Typography
                   component="h4"

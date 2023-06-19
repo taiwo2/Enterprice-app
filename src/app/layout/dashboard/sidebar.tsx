@@ -16,56 +16,36 @@ import {
   List as ListIcon,
   FilePlus as FilePlusIcon,
   LogOut as LogOutIcon,
+  User as UserIcon,
+  DollarSign as DollarSignIcon,
 } from 'react-feather';
-import { Collapse, Divider, ListSubheader } from '@material-ui/core';
+import {
+  Collapse,
+  Divider,
+  ListSubheader,
+  Avatar,
+  Box,
+  Typography,
+} from '@material-ui/core';
 import { RootState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
+import { getProfileAction } from 'features/profile/profileAsyncActions';
 const drawerWidth = 240;
-const useStyles = makeStyles(theme =>
-  createStyles({
-    root: {
-      display: 'flex',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerContainer: {
-      overflow: 'auto',
-    },
-    toolbar: theme.mixins.toolbar,
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
-    link: { textDecoration: 'none', color: 'inherit' },
-    logoWithLink: {
-      display: 'flex',
-      alignItems: 'center',
-      textDecoration: 'none',
-      color: 'inherit',
-    },
-    nested: {
-      paddingLeft: theme.spacing(4),
-    },
-  }),
-);
 
 const Sidebar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const {profile} = useSelector((state: RootState) => state.profile);
- const {claims} = useSelector((state: RootState) => state.auth);
-
+  const { profile } = useSelector((state: RootState) => state.profile);
+  const { claims } = useSelector((state: RootState) => state.auth);
+  console.log(profile, 'taiwo');
   const handleLogout = () => {
     localStorage.clear();
-    };
-  useEffect(() => {}, []);
+  };
+  useEffect(() => {
+    dispatch(getProfileAction(claims.sub));
+  }, []);
   const handleClick = () => {
     setOpen(!open);
   };
@@ -83,9 +63,25 @@ const Sidebar = () => {
           style={{ width: '6rem', height: 'auto' }}
           className={classes.toolbar}
         >
-          <Link to={`${pathname}`} className={classes.logoWithLink}>
-            Logo
-          </Link>
+          {/* check first if profile.name is true before rendering what's inside the
+Box, including the avatar */}
+          {profile.name && (
+            <Box p={2}>
+              <Box display="flex" justifyContent="center">
+                <Avatar
+                  alt="User"
+                  className={classes.avatar}
+                  src={profile.avatar}
+                />
+              </Box>
+              <Box mt={2} textAlign="center">
+                <Typography>{profile.name}</Typography>
+                <Typography variant="body2" color="textSecondary">
+                  Your tier: {profile.tier}
+                </Typography>
+              </Box>
+            </Box>
+          )}
         </Toolbar>
         <div className={classes.drawerContainer}>
           <List>
@@ -146,6 +142,23 @@ const Sidebar = () => {
                 <ListItemText primary={'Calendar'} />
               </ListItem>
             </Link>
+            <ListSubheader>Pages</ListSubheader>
+            <Link className={classes.link} to={`${pathname}/account`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <UserIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Account'} />
+              </ListItem>
+            </Link>
+            <Link className={classes.link} to={`${pathname}/pricing`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <DollarSignIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Pricing'} />
+              </ListItem>
+            </Link>
             <a className={classes.link} href={'/'}>
               <ListItem button onClick={handleLogout}>
                 <ListItemIcon>
@@ -161,3 +174,41 @@ const Sidebar = () => {
   );
 };
 export default Sidebar;
+
+const useStyles = makeStyles(theme =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    avatar: {
+      cursor: 'pointer',
+      width: 64,
+      height: 64,
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    drawerContainer: {
+      overflow: 'auto',
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+    },
+    link: { textDecoration: 'none', color: 'inherit' },
+    logoWithLink: {
+      display: 'flex',
+      alignItems: 'center',
+      textDecoration: 'none',
+      color: 'inherit',
+    },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
+  }),
+);

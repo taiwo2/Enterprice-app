@@ -151,5 +151,33 @@
       "mobile": "+34782364823",
       "policy": true
     }
+  ],
+  "usersDb": [
+    {
+      "id": "7fguyfte5",
+      "email": "demo@acme.io",
+      "name": "Taiwo Adetona",
+      "password": "$2a$10$.vEI32nHFyG15ZACR7q/J.DNT/7iFC1Gfi2fFPMsG09LCPtwk0q/.",
+      "avatar": "/images/avatar.png",
+      "canHire": true,
+      "country": "United States",
+      "city": "NY",
+      "isPublic": true,
+      "phone": "+40 777666555",
+      "role": "admin",
+      "state": "New York",
+      "tier": "Premium",
+      "subscription": {
+        "name": "Premium",
+        "price": 29,
+        "currency": "$",
+        "proposalsLeft": 12,
+        "templatesLeft": 5,
+        "invitesLeft": 24,
+        "adsLeft": 10,
+        "hasAnalytics": true,
+        "hasEmailAlerts": true
+      }
+    }
   ]
 }
