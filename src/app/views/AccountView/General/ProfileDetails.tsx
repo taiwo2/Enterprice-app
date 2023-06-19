@@ -13,7 +13,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
-import { UserType } from 'models/user-type';
+import { UserType } from 'models/userType';
 
 type Props = {
   className?: string;
@@ -58,6 +58,9 @@ const ProfileDetails = ({ className, user, ...rest }: Props) => {
   );
 };
 
+
+export default ProfileDetails;
+
 const useStyles = makeStyles(theme => ({
   root: {},
   name: {
@@ -68,5 +71,3 @@ const useStyles = makeStyles(theme => ({
     width: 100,
   },
 }));
-
-export default ProfileDetails;
