@@ -12,6 +12,9 @@ import ProductList from './views/dashboard/product/ProductList';
 import CalendarView from './views/dashboard/CalendarView';
 import LoginPage from './views/pages/auth/LoginPage';
 import ProtectedRoute from './components/protectedRoute';
+import PricingPage from './views/pages/pricing/PricingPage';
+import path from 'path';
+import AccountView from './views/AccountView';
 const Routers = () => {
   return (
     <div>
@@ -62,6 +65,9 @@ const Routers = () => {
             />
           </ProtectedRoute>
           <Route path={'/login'} element={<LoginPage />} />
+          <Route path={'/pricing'} element={<PricingPage />} />
+
+          <Route path={path + '/account'} element={<AccountView />} />
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}

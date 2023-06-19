@@ -18,6 +18,8 @@ import {
   LogOut as LogOutIcon,
 } from 'react-feather';
 import { Collapse, Divider, ListSubheader } from '@material-ui/core';
+import { RootState } from 'store/reducers';
+import { useDispatch, useSelector } from 'react-redux';
 const drawerWidth = 240;
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -56,6 +58,9 @@ const Sidebar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const {profile} = useSelector((state: RootState) => state.profile);
+ const {claims} = useSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
     localStorage.clear();
