@@ -63,11 +63,10 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-            <Route path="pricing" element={<PricingPage />} />
-
             <Route path="account" element={<AccountView />} />
           </Route>
-          <Route path={'/login'} element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}

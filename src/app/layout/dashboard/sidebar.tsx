@@ -151,7 +151,7 @@ Box, including the avatar */}
                 <ListItemText primary={'Account'} />
               </ListItem>
             </Link>
-            <Link className={classes.link} to={`${pathname}/pricing`}>
+            <Link className={classes.link} to={`/pricing`}>
               <ListItem button>
                 <ListItemIcon>
                   <DollarSignIcon />

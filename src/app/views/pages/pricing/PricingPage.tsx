@@ -33,7 +33,7 @@ const PricingPage = () => {
                 <img
                   alt="Product"
                   className={classes.productImage}
-                  src="images/products/productstandard.svg"
+                  src="/images/products/productstandard.svg"
                 />
                 <Typography
                   component="h4"
