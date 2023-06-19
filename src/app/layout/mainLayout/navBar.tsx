@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { colors } from '@material-ui/core';
 import HeaderProfile from 'app/components/headerProfile';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
