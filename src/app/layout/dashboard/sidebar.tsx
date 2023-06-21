@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+// import Drawer from '@material-ui/core/Drawer';
+// import Toolbar from '@material-ui/core/Toolbar';
+// import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useLocation } from 'react-router';
@@ -22,11 +22,19 @@ import {
 import {
   Collapse,
   Divider,
+  Toolbar,
   ListSubheader,
   Avatar,
   Box,
   Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
 } from '@material-ui/core';
+import clsx from 'clsx';
 import { RootState } from 'store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileAction } from 'features/profile/profileAsyncActions';
@@ -34,12 +42,13 @@ const drawerWidth = 240;
 
 const Sidebar = () => {
   const classes = useStyles();
+  const mobileDevice = useMediaQuery('(max-width:650px)');
+
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { profile } = useSelector((state: RootState) => state.profile);
   const { claims } = useSelector((state: RootState) => state.auth);
-  console.log(profile, 'taiwo');
   const handleLogout = () => {
     localStorage.clear();
   };
@@ -52,10 +61,10 @@ const Sidebar = () => {
   return (
     <div className={classes.root}>
       <Drawer
-        className={classes.drawer}
+        className={clsx(classes.drawer, mobileDevice && classes.drawerClose)}
         variant="permanent"
         classes={{
-          paper: classes.drawerPaper,
+          paper: clsx(classes.drawerPaper, mobileDevice && classes.drawerClose),
         }}
         anchor="left"
       >
@@ -63,9 +72,8 @@ const Sidebar = () => {
           style={{ width: '6rem', height: 'auto' }}
           className={classes.toolbar}
         >
-          {/* check first if profile.name is true before rendering what's inside the
-Box, including the avatar */}
-          {profile.name && (
+          {/* check first if profile.name is true before rendering what's inside the Box, including the avatar */}
+          {profile.name && !mobileDevice && (
             <Box p={2}>
               <Box display="flex" justifyContent="center">
                 <Avatar
@@ -83,92 +91,196 @@ Box, including the avatar */}
             </Box>
           )}
         </Toolbar>
-        <div className={classes.drawerContainer}>
-          <List>
-            <ListSubheader>Reports</ListSubheader>
-            <Link className={classes.link} to={`${pathname}`}>
-              <ListItem button>
+        {mobileDevice ? (
+          <div className={classes.drawerContainer}>
+            <List>
+              <ListSubheader>Reports</ListSubheader>
+              <Link className={classes.link} to={`${pathname}`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <PieChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Dashboard'} />
+                </ListItem>
+              </Link>
+              <ListSubheader>Management</ListSubheader>
+              <ListItem button onClick={handleClick}>
                 <ListItemIcon>
-                  <PieChartIcon />
+                  <ShoppingCartIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Dashboard'} />
+                <ListItemText primary="Products" />
+                {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </ListItem>
-            </Link>
-            <ListSubheader>Management</ListSubheader>
-            <ListItem button onClick={handleClick}>
-              <ListItemIcon>
-                <ShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Products" />
-              {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
-            </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <Link className={classes.link} to={`list-products`}>
-                  <ListItem button className={classes.nested}>
-                    <ListItemIcon>
-                      <ListIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="List Products" />
-                  </ListItem>
-                </Link>
-                <Link
-                  className={classes.link}
-                  to={`${pathname}/create-product`}
-                >
-                  <ListItem button className={classes.nested}>
-                    <ListItemIcon>
-                      <FilePlusIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Create Product" />
-                  </ListItem>
-                </Link>
-              </List>
-            </Collapse>
-            <Link className={classes.link} to={`${pathname}/settings-privacy`}>
-              <ListItem button>
+              <Divider />
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <Link className={classes.link} to={`list-products`}>
+                    <ListItem button className={classes.nested}>
+                      <ListItemIcon>
+                        <ListIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="List Products" />
+                    </ListItem>
+                  </Link>
+                  <Link
+                    className={classes.link}
+                    to={`${pathname}/create-product`}
+                  >
+                    <ListItem button className={classes.nested}>
+                      <ListItemIcon>
+                        <FilePlusIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Create Product" />
+                    </ListItem>
+                  </Link>
+                </List>
+              </Collapse>
+              <Divider />
+              {/* <Link
+                className={classes.link}
+                to={`${pathname}/settings-privacy`}
+              >
+                <ListItem button>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'settings and privacy'} />
+                </ListItem>
+              </Link> */}
+              <ListSubheader>Applications</ListSubheader>
+              <Link className={classes.link} to={`${pathname}/calendar`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <CalendarIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Calendar'} />
+                </ListItem>
+              </Link>
+              <ListSubheader>Pages</ListSubheader>
+              <Link className={classes.link} to={`${pathname}/account`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <UserIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Account'} />
+                </ListItem>
+              </Link>
+              <Divider />
+              <Link className={classes.link} to={`/pricing`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DollarSignIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Pricing'} />
+                </ListItem>
+              </Link>
+              <Divider />
+              <a className={classes.link} href={'/'}>
+                <ListItem button onClick={handleLogout}>
+                  <ListItemIcon>
+                    <LogOutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'logout'} />
+                </ListItem>
+              </a>
+            </List>
+            <Divider />
+          </div>
+        ) : (
+          <div className={classes.drawerContainer}>
+            <List>
+              <ListSubheader>Reports</ListSubheader>
+              <Link className={classes.link} to={`${pathname}`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <PieChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Dashboard'} />
+                </ListItem>
+              </Link>
+              <ListSubheader>Management</ListSubheader>
+              <ListItem button onClick={handleClick}>
                 <ListItemIcon>
-                  <SettingsIcon />
+                  <ShoppingCartIcon />
                 </ListItemIcon>
-                <ListItemText primary={'settings and privacy'} />
+                <ListItemText primary="Products" />
+                {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </ListItem>
-            </Link>
-            <ListSubheader>Applications</ListSubheader>
-            <Link className={classes.link} to={`${pathname}/calendar`}>
-              <ListItem button>
-                <ListItemIcon>
-                  <CalendarIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Calendar'} />
-              </ListItem>
-            </Link>
-            <ListSubheader>Pages</ListSubheader>
-            <Link className={classes.link} to={`${pathname}/account`}>
-              <ListItem button>
-                <ListItemIcon>
-                  <UserIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Account'} />
-              </ListItem>
-            </Link>
-            <Link className={classes.link} to={`/pricing`}>
-              <ListItem button>
-                <ListItemIcon>
-                  <DollarSignIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Pricing'} />
-              </ListItem>
-            </Link>
-            <a className={classes.link} href={'/'}>
-              <ListItem button onClick={handleLogout}>
-                <ListItemIcon>
-                  <LogOutIcon />
-                </ListItemIcon>
-                <ListItemText primary={'logout'} />
-              </ListItem>
-            </a>
-          </List>
-        </div>
+              <Divider />
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <Link className={classes.link} to={`list-products`}>
+                    <ListItem button className={classes.nested}>
+                      <ListItemIcon>
+                        <ListIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="List Products" />
+                    </ListItem>
+                  </Link>
+                  <Link
+                    className={classes.link}
+                    to={`${pathname}/create-product`}
+                  >
+                    <ListItem button className={classes.nested}>
+                      <ListItemIcon>
+                        <FilePlusIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Create Product" />
+                    </ListItem>
+                  </Link>
+                </List>
+              </Collapse>
+              <Divider />
+              <Link
+                className={classes.link}
+                to={`${pathname}/settings-privacy`}
+              >
+                <ListItem button>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'settings and privacy'} />
+                </ListItem>
+              </Link>
+              <ListSubheader>Applications</ListSubheader>
+              <Link className={classes.link} to={`${pathname}/calendar`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <CalendarIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Calendar'} />
+                </ListItem>
+              </Link>
+              <ListSubheader>Pages</ListSubheader>
+              <Link className={classes.link} to={`${pathname}/account`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <UserIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Account'} />
+                </ListItem>
+              </Link>
+              <Divider />
+              <Link className={classes.link} to={`/pricing`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DollarSignIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Pricing'} />
+                </ListItem>
+              </Link>
+              <Divider />
+              <a className={classes.link} href={'/'}>
+                <ListItem button onClick={handleLogout}>
+                  <ListItemIcon>
+                    <LogOutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'logout'} />
+                </ListItem>
+              </a>
+            </List>
+          </div>
+        )}
       </Drawer>
     </div>
   );
@@ -209,6 +321,17 @@ const useStyles = makeStyles(theme =>
     },
     nested: {
       paddingLeft: theme.spacing(4),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1,
+      },
     },
   }),
 );
