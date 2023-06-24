@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components/macro';
 import { Box, Container, Typography, useMediaQuery } from '@material-ui/core';
 import Page from 'app/components/pages';
 export function NotFoundPage() {

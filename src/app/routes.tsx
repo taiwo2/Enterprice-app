@@ -79,8 +79,16 @@ const Routers = () => {
               }
             />
           </Route>
+
+          <Route
+            path="/pricing"
+            element={
+              <Dashboard>
+                <PricingPage />
+              </Dashboard>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
         </Routes>
 
         {/* <Route path="*" element={<NotFoundPage />} /> */}
