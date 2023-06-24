@@ -55,6 +55,7 @@ const Security = ({ className, ...rest }: Props) => {
 
           if (values.password !== values.passwordConfirm) {
             alert('Must match');
+            setError('something wrong');
             return;
           }
           /* If it matches, return this object with the following args to change password */
@@ -73,6 +74,7 @@ const Security = ({ className, ...rest }: Props) => {
           });
         } catch (err) {
           console.error(err);
+          setError(err);
           formikHelpers.setStatus({ success: false });
           formikHelpers.setSubmitting(false);
         }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -8,15 +8,9 @@ import {
   Button,
   Grid,
   Link,
-  SvgIcon,
   Typography,
   makeStyles,
 } from '@material-ui/core';
-import {
-  PlusCircle as PlusCircleIcon,
-  Download as DownloadIcon,
-  Upload as UploadIcon,
-} from 'react-feather';
 type Props = {
   className?: string;
 };

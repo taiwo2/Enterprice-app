@@ -1,10 +1,13 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  useMediaQuery,
+  colors,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { colors } from '@material-ui/core';
 import HeaderProfile from 'app/components/headerProfile';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers';
@@ -27,21 +30,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function NavBar() {
   const classes = useStyles();
+  const mobileDevice = useMediaQuery('(max-width:650px)');
   const { claims } = useSelector((state: RootState) => state.auth);
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Link className={`${classes.link} ${classes.title}`} to={'/'}>
-            LOGO
+            {!mobileDevice && 'LOGO'}
           </Link>
-          <Button color="inherit">
-            <Link to={'/'}>Home</Link>
+
+          <Button className={classes.menuButton} color="inherit">
+            <Link className={classes.link} to={'/'}>
+              Home
+            </Link>
           </Button>
-          <Button color="inherit">About</Button>
+          <Button className={classes.menuButton} color="inherit">
+            <Link className={classes.link} to={'/about'}>
+              About
+            </Link>
+          </Button>
           {claims ? (
             <>
-              <Button color="inherit">
+              <Button className={classes.menuButton} color="inherit">
                 <Link className={classes.link} to={'/dashboard'}>
                   Dashboard
                 </Link>
@@ -49,7 +60,7 @@ export default function NavBar() {
               <HeaderProfile />
             </>
           ) : (
-            <Button color="inherit">
+            <Button className={classes.menuButton} color="inherit">
               <Link className={classes.link} to={'/login'}>
                 Login
               </Link>

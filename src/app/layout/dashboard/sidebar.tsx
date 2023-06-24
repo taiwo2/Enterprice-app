@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-// import Drawer from '@material-ui/core/Drawer';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { useLocation } from 'react-router';
 import {
   PieChart as PieChartIcon,
   ShoppingCart as ShoppingCartIcon,
@@ -44,7 +39,7 @@ const Sidebar = () => {
   const classes = useStyles();
   const mobileDevice = useMediaQuery('(max-width:650px)');
 
-  const { pathname } = useLocation();
+  // const /dashboard} = useLocation();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { profile } = useSelector((state: RootState) => state.profile);
@@ -54,6 +49,7 @@ const Sidebar = () => {
   };
   useEffect(() => {
     dispatch(getProfileAction(claims.sub));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleClick = () => {
     setOpen(!open);
@@ -94,8 +90,7 @@ const Sidebar = () => {
         {mobileDevice ? (
           <div className={classes.drawerContainer}>
             <List>
-              <ListSubheader>Reports</ListSubheader>
-              <Link className={classes.link} to={`${pathname}`}>
+              <Link className={classes.link} to={`/dashboard`}>
                 <ListItem button>
                   <ListItemIcon>
                     <PieChartIcon />
@@ -103,7 +98,6 @@ const Sidebar = () => {
                   <ListItemText primary={'Dashboard'} />
                 </ListItem>
               </Link>
-              <ListSubheader>Management</ListSubheader>
               <ListItem button onClick={handleClick}>
                 <ListItemIcon>
                   <ShoppingCartIcon />
@@ -114,7 +108,7 @@ const Sidebar = () => {
               <Divider />
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <Link className={classes.link} to={`list-products`}>
+                  <Link className={classes.link} to={`dashboard/list-products`}>
                     <ListItem button className={classes.nested}>
                       <ListItemIcon>
                         <ListIcon />
@@ -124,7 +118,7 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className={classes.link}
-                    to={`${pathname}/create-product`}
+                    to={`/dashboard/create-product`}
                   >
                     <ListItem button className={classes.nested}>
                       <ListItemIcon>
@@ -136,19 +130,7 @@ const Sidebar = () => {
                 </List>
               </Collapse>
               <Divider />
-              {/* <Link
-                className={classes.link}
-                to={`${pathname}/settings-privacy`}
-              >
-                <ListItem button>
-                  <ListItemIcon>
-                    <SettingsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={'settings and privacy'} />
-                </ListItem>
-              </Link> */}
-              <ListSubheader>Applications</ListSubheader>
-              <Link className={classes.link} to={`${pathname}/calendar`}>
+              <Link className={classes.link} to={`/dashboard/calendar`}>
                 <ListItem button>
                   <ListItemIcon>
                     <CalendarIcon />
@@ -156,8 +138,7 @@ const Sidebar = () => {
                   <ListItemText primary={'Calendar'} />
                 </ListItem>
               </Link>
-              <ListSubheader>Pages</ListSubheader>
-              <Link className={classes.link} to={`${pathname}/account`}>
+              <Link className={classes.link} to={`/dashboard/account`}>
                 <ListItem button>
                   <ListItemIcon>
                     <UserIcon />
@@ -190,7 +171,7 @@ const Sidebar = () => {
           <div className={classes.drawerContainer}>
             <List>
               <ListSubheader>Reports</ListSubheader>
-              <Link className={classes.link} to={`${pathname}`}>
+              <Link className={classes.link} to={`/dashboard`}>
                 <ListItem button>
                   <ListItemIcon>
                     <PieChartIcon />
@@ -206,10 +187,12 @@ const Sidebar = () => {
                 <ListItemText primary="Products" />
                 {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </ListItem>
-              <Divider />
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <Link className={classes.link} to={`list-products`}>
+                  <Link
+                    className={classes.link}
+                    to={`/dashboard/list-products`}
+                  >
                     <ListItem button className={classes.nested}>
                       <ListItemIcon>
                         <ListIcon />
@@ -219,7 +202,7 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     className={classes.link}
-                    to={`${pathname}/create-product`}
+                    to={`/dashboard/create-product`}
                   >
                     <ListItem button className={classes.nested}>
                       <ListItemIcon>
@@ -230,11 +213,7 @@ const Sidebar = () => {
                   </Link>
                 </List>
               </Collapse>
-              <Divider />
-              <Link
-                className={classes.link}
-                to={`${pathname}/settings-privacy`}
-              >
+              <Link className={classes.link} to={`/dashboard/settings-privacy`}>
                 <ListItem button>
                   <ListItemIcon>
                     <SettingsIcon />
@@ -243,7 +222,7 @@ const Sidebar = () => {
                 </ListItem>
               </Link>
               <ListSubheader>Applications</ListSubheader>
-              <Link className={classes.link} to={`${pathname}/calendar`}>
+              <Link className={classes.link} to={`/dashboard/calendar`}>
                 <ListItem button>
                   <ListItemIcon>
                     <CalendarIcon />
@@ -252,7 +231,7 @@ const Sidebar = () => {
                 </ListItem>
               </Link>
               <ListSubheader>Pages</ListSubheader>
-              <Link className={classes.link} to={`${pathname}/account`}>
+              <Link className={classes.link} to={`/dashboard/account`}>
                 <ListItem button>
                   <ListItemIcon>
                     <UserIcon />
@@ -260,7 +239,6 @@ const Sidebar = () => {
                   <ListItemText primary={'Account'} />
                 </ListItem>
               </Link>
-              <Divider />
               <Link className={classes.link} to={`/pricing`}>
                 <ListItem button>
                   <ListItemIcon>
@@ -269,7 +247,6 @@ const Sidebar = () => {
                   <ListItemText primary={'Pricing'} />
                 </ListItem>
               </Link>
-              <Divider />
               <a className={classes.link} href={'/'}>
                 <ListItem button onClick={handleLogout}>
                   <ListItemIcon>

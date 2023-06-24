@@ -72,6 +72,5 @@ the Redux Toolkit can already infer what particular state it is. */
       },
     );
   },
-  
 });
 export default profileSlice.reducer;

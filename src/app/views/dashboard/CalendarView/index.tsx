@@ -31,6 +31,7 @@ import Toolbar from './Toolbar';
 const CalendarView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { events, loading, error, isModalOpen, selectedRange } = useSelector(
     (state: RootState) => state.calendar,
   );
@@ -42,7 +43,6 @@ const CalendarView = () => {
   );
   const calendarRef = useRef<FullCalendar | null>(null);
 
-  // console.log(events,'taiwo')
   useEffect(() => {
     dispatch(getEvents());
   }, []);

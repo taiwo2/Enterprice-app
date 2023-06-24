@@ -1,4 +1,4 @@
-import { ProductType } from "models/productType";
+import { ProductType } from 'models/productType';
 export const productDefaultValue: ProductType = {
   attributes: [],
   category: '',

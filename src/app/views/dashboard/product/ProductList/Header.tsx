@@ -20,7 +20,7 @@ import {
 type Props = {
   className?: string;
 };
-const Header = ({ className, ...rest }: Props)  => {
+const Header = ({ className, ...rest }: Props) => {
   const classes = useStyles();
   return (
     <Grid

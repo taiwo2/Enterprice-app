@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid,useMediaQuery} add <div className="git commit -m "Ad"></div> from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
 import SidebarNavigation from './sidebar';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -8,6 +8,7 @@ type Props = {
 };
 const Dashboard = ({ children }: Props) => {
   const classes = useStyles();
+  const mobileDevice = useMediaQuery('(max-width:650px)');
   return (
     <Grid
       container
@@ -19,7 +20,11 @@ const Dashboard = ({ children }: Props) => {
 
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
-          <div className={classes.content}>{children}</div>
+          <div
+            className={clsx(classes.content, mobileDevice && classes.leftSpace)}
+          >
+            {children}
+          </div>
         </div>
       </div>
     </Grid>
@@ -52,5 +57,8 @@ const useStyles = makeStyles(theme => ({
     flex: '1 1 auto',
     height: '100%',
     overflow: 'auto',
+  },
+  leftSpace: {
+    paddingLeft: '3rem',
   },
 }));

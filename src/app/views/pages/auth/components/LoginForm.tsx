@@ -49,7 +49,7 @@ const LoginForm = () => {
           formikHelpers.resetForm();
           formikHelpers.setStatus({ success: true });
           formikHelpers.setSubmitting(false);
-          navigate('dashboard');
+          navigate('/dashboard');
         } catch (e) {
           setError('Failed. Please try again.');
           console.log(e.message);

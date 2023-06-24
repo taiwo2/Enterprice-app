@@ -58,7 +58,6 @@ const ProfileDetails = ({ className, user, ...rest }: Props) => {
   );
 };
 
-
 export default ProfileDetails;
 
 const useStyles = makeStyles(theme => ({

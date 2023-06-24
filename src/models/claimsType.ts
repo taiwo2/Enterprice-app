@@ -3,4 +3,4 @@ export type ClaimsType = {
   readonly iat: number;
   readonly exp: number;
   readonly sub: string;
- };
+};

@@ -1,20 +1,19 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import DashboardContent from './views/dashboard/dashboardContent';
-import React, { Children, lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import SettingsPrivacy from './views/dashboard/settingsPrivacy';
 import Dashboard from './layout/dashboard';
 import Home from './views/pages/Home';
 import About from './views/pages/About';
 import { LinearProgress } from '@material-ui/core';
 import ProductView from './views/dashboard/product/ProductView';
-import Results from './views/dashboard/product/ProductList/Results';
 import ProductList from './views/dashboard/product/ProductList';
 import CalendarView from './views/dashboard/CalendarView';
 import LoginPage from './views/pages/auth/LoginPage';
 import ProtectedRoute from './components/protectedRoute';
 import PricingPage from './views/pages/pricing/PricingPage';
-// import path from 'path';
 import AccountView from './views/AccountView';
+import ProductCreate from './views/dashboard/product/ProductCreate';
 const Routers = () => {
   return (
     <div>
@@ -63,7 +62,22 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-            <Route path="account" element={<AccountView />} />
+            <Route
+              path="create-product"
+              element={
+                <Dashboard>
+                  <ProductCreate />
+                </Dashboard>
+              }
+            />
+            <Route
+              path="account"
+              element={
+                <Dashboard>
+                  <AccountView />
+                </Dashboard>
+              }
+            />
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/pricing" element={<PricingPage />} />

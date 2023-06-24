@@ -61,24 +61,12 @@ const AddEditEventForm = ({
       validationSchema={Yup.object().shape({
         allDay: Yup.bool(),
         description: Yup.string().max(5000),
-        // end: Yup.date().when(
-        //   'start',
-        //   (start: Date, schema: any) =>
-        //     start &&
-        //     schema.min(start, 'End date must be later than start date'),
-        // ),
-        endDate: Yup.date().when('startDate', (startDate, schema) => {
-          if (startDate) {
-            // const dayAfter = new Date(startDate.getTime() + 86400000);
-
-            return schema.min(
-              // dayAfter,
-              'End date must be later than start date',
-            );
-          }
-
-          return schema;
-        }),
+        end: Yup.date().when(
+          'start',
+          (start: Date | string[], schema: any) =>
+            start &&
+            schema.min(start, 'End date must be later than start date'),
+        ),
         start: Yup.date().min(new Date(), 'Please choose future date'),
         title: Yup.string().max(255).required('Title is required'),
       })}

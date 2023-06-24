@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Outlet, Route } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { saveClaimsAction } from 'features/auth/authSlice';
