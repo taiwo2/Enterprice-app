@@ -20,13 +20,6 @@ const Routers = () => {
       <Suspense fallback={<LinearProgress style={{ margin: '10rem' }} />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="list-products"
-            element={
-              // <Dashboard>
-              <ProductList />
-            }
-          />
           <Route path="/about" element={<About />} />
           <Route path="dashboard" element={<ProtectedRoute />}>
             <Route
@@ -45,14 +38,14 @@ const Routers = () => {
                 </Dashboard>
               }
             />
-            {/* <Route
+            <Route
               path="list-products"
               element={
                 <Dashboard>
                   <ProductList />
                 </Dashboard>
               }
-            /> */}
+            />
             <Route
               path="settings-privacy"
               element={

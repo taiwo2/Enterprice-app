@@ -50,14 +50,6 @@ export default function NavBar() {
               About
             </Link>
           </Button>
-          <>
-            <Button className={classes.menuButton} color="inherit">
-              <Link className={classes.link} to={'/list-products'}>
-                list
-              </Link>
-            </Button>
-            <HeaderProfile />
-          </>
           {claims ? (
             <>
               <Button className={classes.menuButton} color="inherit">
