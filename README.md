@@ -22,7 +22,7 @@ This project involves creating useful enterprise applications for the actual wor
 
 ## video presentation
 
-## [VIDEO DEMO](https://vimeo.com/839366045?share=copy)
+## [VIDEO DEMO](https://www.loom.com/share/c75af674bb0b4749bc648c122cfe1eea?sid=b4687f6d-62ad-4736-a457-5e38d6fd924e)
 
 ## Built With
 
