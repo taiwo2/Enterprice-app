@@ -3,14 +3,19 @@
 This a project of a practical developing real-world enterprise applications.where you can see list of available product, filter, search, update your profil,e schedule a calendar events.
 
 ![login](./public/images/products/login.png)
+
+<hr/>
 ![dashboard](/public/images/products/dashboard.png)
+<hr/>
 ![productlist](./public/images/products/productlist.png)
+<hr/>
 ![calendar](./public/images/products/calendar.png)
+<hr/>
 ![settings](/public/images/products/generalsettings.png)
 
 ## video presentation
 
-(https://vimeo.com/839366045?share=copy)
+## [VIDEO DEMO](https://vimeo.com/839366045?share=copy)
 
 ## Built With
 
