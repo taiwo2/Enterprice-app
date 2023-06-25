@@ -20,7 +20,7 @@ const Header = ({ className, ...rest }: Props) => {
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >
-        <Link color="inherit" to="/app" component={RouterLink}>
+        <Link color="inherit" to="/dashboard" component={RouterLink}>
           Dashboard
         </Link>
         <Box>

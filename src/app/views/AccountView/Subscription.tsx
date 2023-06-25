@@ -46,7 +46,7 @@ const Subscription = ({ className, ...rest }: Props) => {
               <img
                 alt="Product"
                 className={classes.productImage}
-                src="/images/products/product_premium.svg"
+                src="/images/products/productpremium.svg"
               />
               <Typography variant="overline" color="textSecondary">
                 {subscription.name}
