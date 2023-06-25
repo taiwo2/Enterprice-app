@@ -1,4 +1,4 @@
-# A Full-Stack Enterprise Applications
+# A Full-Stack Enterprise Application
 
 This project involves creating useful enterprise applications for the actual world. where you may view available products, search, update your profile, and arrange events on the calendar.
 
