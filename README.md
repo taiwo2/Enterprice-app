@@ -2,12 +2,11 @@
 
 This a project of a practical developing real-world enterprise applications.where you can see list of available product, filter, search, update your profil,e schedule a calendar events.
 
-- ![login](./public/images/products/login.png)
-- ![register](./public/images/products/register.png)
-- ![dashboard](/public/images/products/dashboard.png)
-- ![productlist](./public/images/products/productlist.png)
-- ![calendar](./public/images/products/calendar.png)
-- ![settings](/public/images/products/generalsettings.png)
+![login](./public/images/products/login.png)
+![dashboard](/public/images/products/dashboard.png)
+![productlist](./public/images/products/productlist.png)
+![calendar](./public/images/products/calendar.png)
+![settings](/public/images/products/generalsettings.png)
 
 ## video presentation
 
@@ -47,10 +46,6 @@ To get a local copy up and running follow these simple example steps:
 7. after that `npm run build` from the terminal.
 
 8. Finally `npm run start:fullstack`. to run both the frontend and the Backend
-
-## Testing :
-
-$ npm test
 
 ## Show your support
 
