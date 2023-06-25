@@ -5,12 +5,19 @@ This a project of a practical developing real-world enterprise applications.wher
 ![login](./public/images/products/login.png)
 
 <hr/>
+
 ![dashboard](/public/images/products/dashboard.png)
+
 <hr/>
+
 ![productlist](./public/images/products/productlist.png)
+
 <hr/>
+
 ![calendar](./public/images/products/calendar.png)
+
 <hr/>
+
 ![settings](/public/images/products/generalsettings.png)
 
 ## video presentation
