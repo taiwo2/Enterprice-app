@@ -1,6 +1,6 @@
 # A Full-Stack enterprise applications
 
-This a project of a practical developing real-world enterprise applications.where you can see list of available product, filter, search, update your profil,e schedule a calendar events.
+This project involves creating useful enterprise applications for the actual world. where you may view available products, search, update your profile, and arrange events on the calendar.
 
 ![login](./public/images/products/login.png)
 
